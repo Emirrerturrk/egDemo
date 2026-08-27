@@ -14,7 +14,7 @@ export default function Navbar({ onOpenBrief }: NavbarProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -22,19 +22,19 @@ export default function Navbar({ onOpenBrief }: NavbarProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-[#F7F4EE]/92 backdrop-blur-md border-b border-[#25201B]/8 py-4 shadow-sm"
-          : "bg-transparent py-6 md:py-8"
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled || mobileMenuOpen
+          ? "bg-[#F7F4EE]/96 backdrop-blur-md border-b border-[#25201B]/10 py-3 sm:py-4 shadow-sm"
+          : "bg-[#F7F4EE]/60 sm:bg-transparent backdrop-blur-sm sm:backdrop-blur-none py-3.5 sm:py-6 md:py-8"
       }`}
     >
-      <div className="max-w-[1540px] mx-auto px-6 md:px-12 flex items-center justify-between">
+      <div className="max-w-[1540px] mx-auto px-4 sm:px-6 md:px-12 flex items-center justify-between">
         <Link href="/" className="flex flex-col group">
-          <span className="serif-title text-2xl md:text-3xl font-medium tracking-tight text-[#141311] group-hover:text-[#735E4B] transition-colors">
+          <span className="serif-title text-xl sm:text-2xl md:text-3xl font-medium tracking-tight text-[#141311] group-hover:text-[#735E4B] transition-colors">
             EG DESIGN
           </span>
-          <span className="editorial-label text-[9px] text-[#735E4B] tracking-[0.24em] -mt-1">
-            EZGİ GÜVEN GÜRSÖĞÜT &sdot; ARCHITECTURE & INTERIORS
+          <span className="editorial-label text-[8px] sm:text-[9px] text-[#735E4B] tracking-[0.22em] sm:tracking-[0.24em] -mt-1">
+            EZGİ GÜVEN GÜRSÖĞÜT
           </span>
         </Link>
 
@@ -73,60 +73,61 @@ export default function Navbar({ onOpenBrief }: NavbarProps) {
         </nav>
 
         {/* Action Button */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-3 sm:space-x-4">
           <button
             onClick={() => onOpenBrief()}
-            className="inline-flex items-center text-[10px] md:text-xs tracking-[0.2em] uppercase border border-[#25201B]/30 bg-white/40 hover:bg-[#25201B] hover:text-[#F7F4EE] px-5 py-2.5 rounded-full transition-all duration-300 shadow-sm"
+            className="inline-flex items-center text-[9px] sm:text-[10px] md:text-xs tracking-[0.18em] sm:tracking-[0.2em] uppercase border border-[#25201B]/30 bg-white/60 hover:bg-[#25201B] hover:text-[#F7F4EE] px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full transition-all duration-300 shadow-sm"
           >
             <span>Proje Başlat</span>
-            <ArrowRight className="w-3.5 h-3.5 ml-2" />
+            <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 ml-1.5 sm:ml-2" />
           </button>
 
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden text-[#141311] p-1"
+            className="lg:hidden text-[#141311] p-1.5 rounded-md hover:bg-black/5 transition-colors"
+            aria-label="Menü"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#F7F4EE] border-b border-[#25201B]/10 px-6 py-8 flex flex-col space-y-4 text-xs tracking-widest uppercase font-semibold">
+        <div className="lg:hidden bg-[#F7F4EE] border-b border-[#25201B]/10 px-6 py-6 flex flex-col space-y-3 text-xs tracking-widest uppercase font-semibold shadow-lg">
           <a
             href="#about"
             onClick={() => setMobileMenuOpen(false)}
-            className="py-2 border-b border-[#25201B]/5"
+            className="py-2.5 border-b border-[#25201B]/5 text-[#141311]"
           >
             Hakkımızda
           </a>
           <a
             href="#projects"
             onClick={() => setMobileMenuOpen(false)}
-            className="py-2 border-b border-[#25201B]/5"
+            className="py-2.5 border-b border-[#25201B]/5 text-[#141311]"
           >
             Projeler
           </a>
           <a
             href="#services"
             onClick={() => setMobileMenuOpen(false)}
-            className="py-2 border-b border-[#25201B]/5"
+            className="py-2.5 border-b border-[#25201B]/5 text-[#141311]"
           >
             Hizmetlerimiz
           </a>
           <a
             href="#products"
             onClick={() => setMobileMenuOpen(false)}
-            className="py-2 border-b border-[#25201B]/5"
+            className="py-2.5 border-b border-[#25201B]/5 text-[#141311]"
           >
             Özel Mobilya
           </a>
           <a
             href="#contact"
             onClick={() => setMobileMenuOpen(false)}
-            className="py-2"
+            className="py-2.5 text-[#141311]"
           >
             İletişim
           </a>
